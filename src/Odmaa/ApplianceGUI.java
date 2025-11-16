@@ -35,6 +35,7 @@ public class ApplianceGUI extends javax.swing.JFrame {
         mainMenuBTN = new javax.swing.JButton();
         applianceListBTN = new javax.swing.JButton();
         iconLBL = new javax.swing.JLabel();
+        backgroundLBL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +64,7 @@ public class ApplianceGUI extends javax.swing.JFrame {
         );
 
         mainPanel.setToolTipText("");
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainMenuBTN.setBackground(new java.awt.Color(26, 101, 26));
         mainMenuBTN.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
@@ -73,6 +75,7 @@ public class ApplianceGUI extends javax.swing.JFrame {
                 mainMenuBTNActionPerformed(evt);
             }
         });
+        mainPanel.add(mainMenuBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 163, 62));
 
         applianceListBTN.setBackground(new java.awt.Color(26, 101, 26));
         applianceListBTN.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
@@ -83,36 +86,15 @@ public class ApplianceGUI extends javax.swing.JFrame {
                 applianceListBTNActionPerformed(evt);
             }
         });
+        mainPanel.add(applianceListBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 62));
 
         iconLBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/power/wise/app/icons/electric-appliance.png"))); // NOI18N
         iconLBL.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        mainPanel.add(iconLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, -1, -1));
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap(531, Short.MAX_VALUE)
-                .addComponent(iconLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(373, 373, 373))
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(applianceListBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
-                .addComponent(mainMenuBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(iconLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(applianceListBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mainMenuBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95))
-        );
+        backgroundLBL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/power/wise/app/icons/appliancebackground.jpg"))); // NOI18N
+        backgroundLBL.setText("jLabel1");
+        mainPanel.add(backgroundLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(-5, -2, 800, 430));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,7 +105,7 @@ public class ApplianceGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 83, Short.MAX_VALUE))
+                        .addGap(0, 429, Short.MAX_VALUE))
                     .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -178,6 +160,7 @@ public class ApplianceGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel applianceLBL;
     private javax.swing.JButton applianceListBTN;
+    private javax.swing.JLabel backgroundLBL;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel iconLBL;
     private javax.swing.JButton mainMenuBTN;
