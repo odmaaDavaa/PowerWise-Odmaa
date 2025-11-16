@@ -1,5 +1,10 @@
-/PowerWise/nbproject/private/
-/build/
-/dist/
+# macOS files
 .DS_Store
+
+# NetBeans private files
 nbproject/private/private.xml
+
+# Other build files we never commit
+build/
+dist/
+nbproject/private/
