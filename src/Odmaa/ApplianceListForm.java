@@ -127,9 +127,9 @@ public class ApplianceListForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundPLLayout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(searchappliance, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(searchBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(59, 59, 59))
         );
         backgroundPLLayout.setVerticalGroup(
             backgroundPLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
