@@ -4,11 +4,14 @@
  */
 package Odmaa;
 
+
+
+
 /**
  *
  * @author apple
  */
-public class Appliance {
+public class Appliance extends ApplianceManager{
     private String applianceName;
     private double energyUsage;
     private double wattage;

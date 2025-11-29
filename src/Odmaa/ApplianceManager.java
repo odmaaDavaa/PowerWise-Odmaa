@@ -4,10 +4,12 @@
  */
 package Odmaa;
 
+import java.util.ArrayList;
+import power.wise.app.SmartEnergyApp;
 /**
  *
  * @author apple
  */
 public class ApplianceManager {
-    
+    private ArrayList<Appliance> appliance;
 }

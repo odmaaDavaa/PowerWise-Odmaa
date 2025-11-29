@@ -4,18 +4,29 @@
  */
 package Odmaa;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author apple
  */
 public class AddApplianceForm extends javax.swing.JFrame {
+    private ArrayList<Appliance> appliance;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddApplianceForm.class.getName());
-
+    String applianceName;
+    double energyUsage, wattage, hours;
     /**
      * Creates new form AddApplianceForm
      */
     public AddApplianceForm() {
+        appliance = new ArrayList<>();
         initComponents();
     }
 
@@ -28,21 +39,154 @@ public class AddApplianceForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        headerPL = new javax.swing.JPanel();
+        titleLBL = new javax.swing.JLabel();
+        mainPL = new javax.swing.JPanel();
+        saveBTN = new javax.swing.JButton();
+        backBTN = new javax.swing.JButton();
+        addBTN = new javax.swing.JButton();
+        hoursLBL = new javax.swing.JLabel();
+        wattageTF = new javax.swing.JTextField();
+        hoursTF = new javax.swing.JTextField();
+        nameTF = new javax.swing.JTextField();
+        nameLBL = new javax.swing.JLabel();
+        wattageLBL = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        displayTA = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        headerPL.setBackground(new java.awt.Color(26, 101, 26));
+
+        titleLBL.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        titleLBL.setForeground(new java.awt.Color(255, 255, 255));
+        titleLBL.setText("Power Wise - Add Appliance Form");
+
+        javax.swing.GroupLayout headerPLLayout = new javax.swing.GroupLayout(headerPL);
+        headerPL.setLayout(headerPLLayout);
+        headerPLLayout.setHorizontalGroup(
+            headerPLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerPLLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(titleLBL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        headerPLLayout.setVerticalGroup(
+            headerPLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(headerPLLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(titleLBL)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        mainPL.setBackground(new java.awt.Color(204, 255, 204));
+        mainPL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        saveBTN.setText("SAVE");
+        saveBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBTNActionPerformed(evt);
+            }
+        });
+        mainPL.add(saveBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
+
+        backBTN.setText("BACK");
+        backBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBTNActionPerformed(evt);
+            }
+        });
+        mainPL.add(backBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
+
+        addBTN.setText("ADD");
+        addBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBTNActionPerformed(evt);
+            }
+        });
+        mainPL.add(addBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+
+        hoursLBL.setText("Hours Used By Day:");
+        mainPL.add(hoursLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        mainPL.add(wattageTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 240, -1));
+        mainPL.add(hoursTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 120, 240, -1));
+        mainPL.add(nameTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 240, -1));
+
+        nameLBL.setText("Name:");
+        mainPL.add(nameLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        wattageLBL.setText("Wattage:");
+        mainPL.add(wattageLBL, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        displayTA.setColumns(20);
+        displayTA.setRows(5);
+        jScrollPane1.setViewportView(displayTA);
+
+        mainPL.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 240, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(headerPL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainPL, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(headerPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPL, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
+        // TODO add your handling code here:
+        new ApplianceListForm().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_backBTNActionPerformed
+
+    private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
+        // TODO add your handling code here:
+        applianceName = nameTF.getText();
+        hours = Double.parseDouble(hoursTF.getText());
+        wattage = Double.parseDouble(wattageTF.getText());
+        energyUsage = wattage * hours;
+        
+        Appliance tempA = new Appliance(applianceName,energyUsage, wattage, hours);
+        appliance.add(tempA);
+        displayTA.setText("Appliance added" + tempA.toString());
+    }//GEN-LAST:event_addBTNActionPerformed
+
+    private void saveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTNActionPerformed
+        // TODO add your handling code here:
+        try {
+        File f = new File("applianceList.txt");
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f, true));
+
+        bw.write("Appliance Name: " + applianceName);
+        bw.newLine();
+        bw.write("Wattage: " + wattage);
+        bw.newLine();
+        bw.write("Hours of Usage: " + hours);
+        bw.newLine();
+        bw.write("Energy Usage: " + energyUsage);
+        bw.newLine();
+        bw.close();
+        
+        displayTA.append(" written to file");
+        }catch(IOException e){
+            System.out.println("Wrinting to file error: " + e);
+        }
+    }//GEN-LAST:event_saveBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +214,19 @@ public class AddApplianceForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBTN;
+    private javax.swing.JButton backBTN;
+    private javax.swing.JTextArea displayTA;
+    private javax.swing.JPanel headerPL;
+    private javax.swing.JLabel hoursLBL;
+    private javax.swing.JTextField hoursTF;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel mainPL;
+    private javax.swing.JLabel nameLBL;
+    private javax.swing.JTextField nameTF;
+    private javax.swing.JButton saveBTN;
+    private javax.swing.JLabel titleLBL;
+    private javax.swing.JLabel wattageLBL;
+    private javax.swing.JTextField wattageTF;
     // End of variables declaration//GEN-END:variables
 }

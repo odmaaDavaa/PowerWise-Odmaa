@@ -4,6 +4,11 @@
  */
 package Odmaa;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import power.wise.app.PowerWiseGUI;
 
 /**
@@ -13,12 +18,16 @@ import power.wise.app.PowerWiseGUI;
 public class ApplianceListForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ApplianceListForm.class.getName());
-
+  
+    
     /**
      * Creates new form ApplianceListForm
      */
     public ApplianceListForm() {
         initComponents();
+        loadComboBox();
+      
+       
     }
 
     /**
@@ -38,6 +47,8 @@ public class ApplianceListForm extends javax.swing.JFrame {
         iconLBL = new javax.swing.JLabel();
         backLBL = new javax.swing.JLabel();
         removeBTN = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        displayTA = new javax.swing.JTextArea();
         backgroundPL = new javax.swing.JPanel();
         searchBTN = new javax.swing.JButton();
         searchappliance = new javax.swing.JComboBox<>();
@@ -104,13 +115,29 @@ public class ApplianceListForm extends javax.swing.JFrame {
         removeBTN.setBackground(new java.awt.Color(26, 101, 26));
         removeBTN.setForeground(new java.awt.Color(255, 255, 255));
         removeBTN.setText("REMOVE");
+        removeBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBTNActionPerformed(evt);
+            }
+        });
         mainPanel.add(removeBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 130, 40));
+
+        displayTA.setColumns(20);
+        displayTA.setRows(5);
+        jScrollPane1.setViewportView(displayTA);
+
+        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         backgroundPL.setBackground(new java.awt.Color(26, 101, 26));
         backgroundPL.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         searchBTN.setForeground(new java.awt.Color(26, 101, 26));
         searchBTN.setText("SEARCH");
+        searchBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBTNActionPerformed(evt);
+            }
+        });
 
         searchappliance.setForeground(new java.awt.Color(26, 101, 26));
         searchappliance.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Appliance" }));
@@ -128,8 +155,8 @@ public class ApplianceListForm extends javax.swing.JFrame {
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(searchappliance, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(searchBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addComponent(searchBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         backgroundPLLayout.setVerticalGroup(
             backgroundPLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,6 +196,9 @@ public class ApplianceListForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+        
+                
+    
     private void backBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTNActionPerformed
         // TODO add your handling code here:
         new ApplianceGUI().setVisible(true);
@@ -180,10 +210,101 @@ public class ApplianceListForm extends javax.swing.JFrame {
         new AddApplianceForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_addBTNActionPerformed
-
+    private void loadComboBox(){
+            File f;
+            FileReader fr;
+            BufferedReader br;
+        try{    
+            f = new File("applianceList.txt");
+            fr = new FileReader(f);
+            br = new BufferedReader(fr);
+            String line;
+            
+            while((line = br.readLine()) != null){
+                if(line.startsWith("Appliance Name: ")){
+                    String name = line.substring(16).trim();
+                    searchappliance.addItem(name);                
+                }
+            }
+            br.close();
+        }catch(IOException e){
+            System.out.println("Error: " + e);
+        }
+    }
     private void searchapplianceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchapplianceActionPerformed
         // TODO add your handling code here:
+           
+        
     }//GEN-LAST:event_searchapplianceActionPerformed
+    
+    private void searchBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBTNActionPerformed
+        // TODO add your handling code here:
+        String selectedName = searchappliance.getSelectedItem().toString();
+        File f;
+        FileReader fr;
+        BufferedReader br;
+        try{
+            f = new File("applianceList.txt");
+            fr = new FileReader(f);
+            br = new BufferedReader(fr);
+            String line;
+            boolean found = false;
+
+        String name = "", watt = "", hrs = "", energy = "";
+
+        while ((line = br.readLine()) != null) {
+
+            if (line.startsWith("Appliance Name: ")) {
+
+                name = line.substring("Appliance Name: ".length()).trim();
+
+                if (name.equalsIgnoreCase(selectedName)) {
+
+                    String lineWatt = br.readLine();
+                    String lineHrs = br.readLine();
+                    String lineEnergy = br.readLine();
+
+                    if (lineWatt != null && lineWatt.startsWith("Wattage: ")) {
+                        watt = lineWatt.substring("Wattage: ".length()).trim();
+                    }
+
+                    if (lineHrs != null && lineHrs.startsWith("Hours of Usage: ")) {
+                        hrs = lineHrs.substring("Hours of Usage: ".length()).trim();
+                    }
+
+                    if (lineEnergy != null && lineEnergy.startsWith("Energy Usage: ")) {
+                        energy = lineEnergy.substring("Energy Usage: ".length()).trim();
+                    }
+
+                    found = true;
+                    break;
+                }
+            }
+        }
+            
+               
+            
+         br.close();
+          if (found) {
+            displayTA.setText(          
+                "Appliance Name: " + name + "\n" +
+                "Wattage: " + watt + "\n" +
+                "Hours Used: " + hrs + "\n" +
+                "Energy Usage: " + energy
+            );
+        } else {
+            displayTA.setText("No appliance found.");
+        }
+        }catch(IOException e){
+            System.out.println("Error: " + e);
+        }
+        
+    }//GEN-LAST:event_searchBTNActionPerformed
+
+    private void removeBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBTNActionPerformed
+        // TODO add your handling code here:
+        displayTA.setText("");
+    }//GEN-LAST:event_removeBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,11 +338,17 @@ public class ApplianceListForm extends javax.swing.JFrame {
     private javax.swing.JLabel backLBL;
     private javax.swing.JLabel backgroundLBL;
     private javax.swing.JPanel backgroundPL;
+    private javax.swing.JTextArea displayTA;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel iconLBL;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton removeBTN;
     private javax.swing.JButton searchBTN;
     private javax.swing.JComboBox<String> searchappliance;
     // End of variables declaration//GEN-END:variables
+
+    private Object subString(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
